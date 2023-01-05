@@ -1,0 +1,13 @@
+.productCard {
+  width: 16rem;
+  height: 250px;
+  padding: 2rem;
+  background-color: ghostwhite;
+  margin: 1rem;
+}
+
+.productCard img {
+  width: 100%;
+  height: 95%;
+  object-fit: cover;
+}
