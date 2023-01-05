@@ -4,22 +4,22 @@ import "./productsPage.css";
 export const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const fetchProducts = async () => {
-    const res = await fetch("https://dummyjson.com/products?limit=100");
+    const res = await fetch(
+      `https://dummyjson.com/products?limit=10&skip=${page * 10 - 10}`
+    );
     const data = await res.json();
     setProducts(data.products);
+    setTotalPages(data.total / 10);
   };
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [page]);
 
   function handlePageSelect(selectPage) {
-    if (
-      selectPage >= 1 &&
-      selectPage <= products.length / 10 &&
-      page !== selectPage
-    ) {
+    if (selectPage >= 1 && selectPage <= totalPages && page !== selectPage) {
       setPage(selectPage);
     }
   }
@@ -27,7 +27,7 @@ export const ProductPage = () => {
   return (
     <div className="productsPage">
       <div className="productsPage__productsList">
-        {products.slice(page * 10 - 10, page * 10).map((item, i) => {
+        {products.map((item, i) => {
           return <Product key={item.id} item={item} />;
         })}
       </div>
@@ -35,11 +35,13 @@ export const ProductPage = () => {
         <div className="productsPage__pagination">
           <span
             onClick={() => handlePageSelect(page - 1)}
-            className={page > 1 ? "" : "productsPage__pagination__disabled"}
+            className={
+              totalPages > 1 ? "" : "productsPage__pagination__disabled"
+            }
           >
             ◀
           </span>
-          {[...Array(products.length / 10)].map((_, i) => {
+          {[...Array(totalPages)].map((_, i) => {
             return (
               <span
                 key={i}
@@ -55,9 +57,7 @@ export const ProductPage = () => {
           <span
             onClick={() => handlePageSelect(page + 1)}
             className={
-              page < products.length / 10
-                ? ""
-                : "productsPage__pagination__disabled"
+              page < totalPages ? "" : "productsPage__pagination__disabled"
             }
           >
             ▶

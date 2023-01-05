@@ -1,13 +1,14 @@
 .productsPage {
   display: flex;
   flex-direction: column;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .productsPage__productsList {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
