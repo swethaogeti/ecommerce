@@ -1,0 +1,36 @@
+.productsPage {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.productsPage__productsList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.productsPage__pagination {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.productsPage__pagination span {
+  padding: 15px 20px;
+  cursor: pointer;
+  border: 1px solid black;
+
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.productsPage__pagination__selected {
+  background-color: rgb(152, 197, 255);
+}
+
+.productsPage__pagination__disabled {
+  opacity: 0;
+}
